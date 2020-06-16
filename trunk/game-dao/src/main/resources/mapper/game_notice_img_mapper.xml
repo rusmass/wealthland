@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ascn.richlife.dao.login.NoticeImgDao">
+
+    <!--添加图片-->
+    <insert id="addImg" parameterType="com.ascn.richlife.model.login.NoticeImg" >
+        INSERT INTO wish_each.we_game_notice_img(img) VALUE(#{img})
+    </insert>
+
+    <!--获取图片-->
+    <select id="getImg" parameterType="int" resultType="com.ascn.richlife.model.login.NoticeImg">
+        SELECT img_id,target_url,priority,status,createtime,title,img FROM wish_each.we_game_notice_img WHERE img_id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ascn.richlife.dao.card.OuterSmallChanceDao">
+
+
+    <!--查询所有小机会卡牌信息-->
+    <select id="selectCard" resultType="OuterSmallChance">
+        SELECT id,type,name,path,instructions,number,cost,sellPrice,downPayment,investmentIncome,mortgageLoan,integralType,integralNumber,nonLaborIncome,cardIntegral,giveUpIntegral FROM we_card_outer_small_chance
+    </select>
+
+    <!--根据ID查询玩家-->
+    <select id="selectCardById" parameterType="java.lang.Integer" resultType="OuterSmallChance">
+        SELECT id,type,name,path,instructions,number,cost,sellPrice,downPayment,investmentIncome,mortgageLoan,integralType,integralNumber,nonLaborIncome,cardIntegral,giveUpIntegral FROM we_card_outer_small_chance WHERE id =  #{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ascn.richlife.dao.gamerecord.GameStatisticsDao">
+
+    <!--添加游戏数据统计-->
+    <insert id="addGameStatistics" parameterType="GameStatistics">
+        INSERT INTO we_game_statistics (playerId,winScreenings,failScreenings,winrate,whenLong)
+        VALUES (#{playerId},#{winScreenings},#{failScreenings},#{winrate},#{whenLong})
+    </insert>
+
+    <!--查询游戏数据统计-->
+    <select id="getGameStatistics" parameterType="java.lang.String" resultType="GameStatistics">
+        SELECT gameStatisticsId,playerId,winScreenings,failScreenings,winrate,whenLong,status,createTime FROM we_game_statistics WHERE playerId = #{playerId}
+    </select>
+
+    <!--更新游戏数据统计-->
+    <update id="updateGameStatistics" parameterType="GameStatistics">
+        UPDATE we_game_statistics SET playerId = #{playerId},winScreenings = #{winScreenings},failScreenings = #{failScreenings},winrate = #{winrate},whenLong = #{whenLong} WHERE playerId = #{playerId}
+    </update>
+</mapper>

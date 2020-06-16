@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ascn.richlife.dao.login.InspirationDao">
+
+    <!--添加玩家感悟-->
+    <insert id="Inspiration" parameterType="java.lang.String">
+        INSERT INTO wish_each.we_inspiration
+        <choose>
+            <when test="nickName !=null and nickName.length()>0">(content,nickname,avatar) VALUES
+                (#{content},#{nickName},#{avatar})
+            </when>
+            <otherwise>(content) VALUES(#{content})</otherwise>
+        </choose>
+    </insert>
+
+    <!--分页显示玩家感悟-->
+    <select id="findPage" parameterType="int" resultMap="inspirations">
+        SELECT id,createTime,avatar,nickname,content,status FROM wish_each.we_inspiration WHERE status = 1 ORDER BY createTime limit #{start},#{end}
+    </select>
+
+    <resultMap id="inspirations" type="Inspiration">
+        <result column="id" property="id"></result>
+        <result column="createtime" property="createTime"></result>
+        <result column="avatar" property="avatar"></result>
+        <result column="nickname" property="nickName"></result>
+        <result column="content" property="content"></result>
+        <result column="status" property="status"></result>
+    </resultMap>
+
+    <!--总记录数-->
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*) FROM wish_each.we_inspiration
+        <choose>
+            <when test="nickName!=null and nickName.length()>0 ">WHERE nickname = #{nickName} AND status = 1</when>
+            <otherwise>WHERE status = 1</otherwise>
+        </choose>
+    </select>
+
+    <!--查询个人发布感悟-->
+    <select id="findByNickName" resultMap="inspirations">
+        SELECT id,createTime,avatar,nickname,content,status FROM wish_each.we_inspiration WHERE nickname = #{nickName} AND status = 1 ORDER BY createTime limit #{start},#{end}
+    </select>
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ascn.richlife.dao.login.GameDao">
+
+    <!--获取版本号-->
+    <select id="getGameVersion" resultMap="gameVersion" >
+        SELECT version_id,version_code,compatible,android_download,ios_download,create_time,status FROM we_game_version ORDER BY create_time  DESC limit 1
+    </select>
+    <resultMap id="gameVersion" type="GameVersion">
+        <result property="version_id" column="version_id"/>
+        <result property="versionCode" column="version_code"/>
+        <result property="compatible" column="compatible"/>
+        <result property="androidDownload" column="android_download"/>
+        <result property="iosDownload" column="ios_download"/>
+        <result property="create_time" column="create_time"/>
+        <result property="status" column="status"/>
+    </resultMap>
+</mapper>

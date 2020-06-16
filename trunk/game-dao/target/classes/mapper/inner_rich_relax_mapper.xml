@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ascn.richlife.dao.card.InnerRichRelaxDao">
+
+
+    <!--查询所有有闲有钱卡牌信息-->
+    <select id="selectCard" resultType="InnerRichRelax">
+        SELECT id,name,path,instructions,investmentPay,investmentIncome,flowCash,timeIntegral,cardIntegral,giveUpIntegral FROM we_card_inner_rich_relax
+    </select>
+
+    <!--根据ID查询卡牌-->
+    <select id="selectCardById" parameterType="java.lang.Integer" resultType="InnerRichRelax">
+        SELECT id,name,path,instructions,investmentPay,investmentIncome,flowCash,timeIntegral,cardIntegral,giveUpIntegral FROM we_card_inner_rich_relax WHERE id =  #{id}
+    </select>
+</mapper>

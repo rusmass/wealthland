@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.ascn.richlife.model.login.User" alias="User"/>
+        <typeAlias type="com.ascn.richlife.model.login.Player" alias="Player"/>
+        <typeAlias type="com.ascn.richlife.model.role.Role" alias="Role"/>
+        <typeAlias type="com.ascn.richlife.model.login.Inspiration" alias="Inspiration"/>
+        <typeAlias type="com.ascn.richlife.model.card.Special" alias="Special"/>
+        <typeAlias type="com.ascn.richlife.model.card.InnerRichRelax" alias="InnerRichRelax"/>
+        <typeAlias type="com.ascn.richlife.model.card.InnerQualityLife" alias="InnerQualityLife"/>
+        <typeAlias type="com.ascn.richlife.model.card.OuterFate" alias="OuterFate"/>
+        <typeAlias type="com.ascn.richlife.model.card.OuterBigChance" alias="OuterBigChance"/>
+        <typeAlias type="com.ascn.richlife.model.card.InnerInvestment" alias="InnerInvestment"/>
+        <typeAlias type="com.ascn.richlife.model.card.InnerFate" alias="InnerFate"/>
+        <typeAlias type="com.ascn.richlife.model.card.OuterStock" alias="OuterStock"/>
+        <typeAlias type="com.ascn.richlife.model.card.OuterSmallChance" alias="OuterSmallChance"/>
+        <typeAlias type="com.ascn.richlife.model.countInfo.GameStatistics" alias="GameStatistics"/>
+        <typeAlias type="com.ascn.richlife.model.countInfo.GameRecord" alias="GameRecord"/>
+        <typeAlias type="com.ascn.richlife.model.login.GameVersion" alias="GameVersion"/>
+        <typeAlias type="com.ascn.richlife.model.login.NoticeImg" alias="NoticeImg"/>
+        <typeAlias type="com.ascn.richlife.model.login.GameNotice" alias="GameNotice"/>
+        <typeAlias type="com.ascn.richlife.model.card.CardStudy" alias="CardStudy"/>
+        <typeAlias type="com.ascn.richlife.model.card.CardCharity" alias="CardCharity"/>
+        <typeAlias type="com.ascn.richlife.model.card.CardHealth" alias="CardHealth"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/wish_each?useSSL=false"/>
+                <!--<propenamename="username" value="zhb"/>
+                <propenamename="password" value="BEJFGke1"/>-->
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+                <property name="defaultAutoCommit" value="false"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mapper/user_mapper.xml"/>
+        <mapper resource="mapper/player_mapper.xml"/>
+        <mapper resource="mapper/role_mapper.xml"/>
+        <mapper resource="mapper/inspiration_mapper.xml"/>
+        <mapper resource="mapper/special_mapper.xml"/>
+        <mapper resource="mapper/inner_rich_relax_mapper.xml"/>
+        <mapper resource="mapper/inner_quality_life_mapper.xml"/>
+        <mapper resource="mapper/outer_fate_mapper.xml"/>
+        <mapper resource="mapper/outer_big_chance_mapper.xml"/>
+        <mapper resource="mapper/inner_investment_mapper.xml"/>
+        <mapper resource="mapper/inner_fate_mapper.xml"/>
+        <mapper resource="mapper/outer_stock_mapper.xml"/>
+        <mapper resource="mapper/outer_small_chance_mapper.xml"/>
+        <mapper resource="mapper/game_statistics_mapper.xml"/>
+        <mapper resource="mapper/game_record_mapper.xml"/>
+        <mapper resource="mapper/game_notice_img_mapper.xml"/>
+        <mapper resource="mapper/game_notice_mapper.xml"/>
+        <mapper resource="mapper/game_version_mapper.xml"/>
+        <mapper resource="mapper/card_study_mapper.xml"/>
+        <mapper resource="mapper/card_charity_mapper.xml"/>
+        <mapper resource="mapper/card_health_mapper.xml"/>
+        <mapper resource="mapper/role_mapper.xml"/>
+    </mappers>
+
+</configuration>

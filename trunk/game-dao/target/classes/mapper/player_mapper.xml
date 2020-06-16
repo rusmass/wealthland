@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ascn.richlife.dao.login.PlayerDao">
+
+    <!--获取玩家的昵称-->
+    <select id="getPlayerName" parameterType="String" resultType="String">
+        SELECT player_name FROM wish_each.we_player WHERE id = #{id}
+    </select>
+
+    <!--获取玩家信息-->
+    <select id="getPlayerInfo" parameterType="String" resultMap="player">
+        SELECT id,player_name,player_avatar,player_birthday,player_constellation,player_gender,player_status FROM wish_each.we_player WHERE id = #{id}
+    </select>
+
+    <!--通过用户ID查询角色-->
+    <select id="findPlayerByUserId" parameterType="java.lang.String" resultMap="player">
+        SELECT id,player_name,player_avatar,player_birthday,player_constellation,player_gender,player_status FROM wish_each.we_player WHERE user_id = #{id};
+    </select>
+
+    <!--创建角色信息-->
+    <update id="createRoleInfo" parameterType="Player">
+        INSERT IGNORE INTO wish_each.we_player(id, player_name, player_avatar, player_gender,player_play_num, user_id,create_time)
+        VALUES (#{id},#{name},#{avatar},#{gender},#{gameNumber},#{user_Id},#{create_time})
+    </update>
+
+    <!--查询名称是否重复-->
+    <select id="findPlayerByName" parameterType="java.lang.String" resultMap="player">
+        SELECT player_name FROM wish_each.we_player WHERE player_name=#{name}
+    </select>
+
+    <!--更新玩家登录次数-->
+    <update id="updateGameNumber">
+        UPDATE wish_each.we_player SET player_play_num = #{gameNumber} WHERE user_id = #{userId}
+    </update>
+
+    <!--上传头像-->
+    <update id="uploaderAvatar" parameterType="java.lang.String">
+        UPDATE wish_each.we_player SET player_avatar = #{avatar} WHERE id = #{playerId}
+    </update>
+
+    <!--更新玩家信息-->
+    <update id="updatePlayer" parameterType="Player">
+        UPDATE IGNORE wish_each.we_player
+        <trim prefix="set" suffixOverrides="," >
+            <if test="name!=null and name.length()>0">player_name = #{name},</if>
+            <if test="gender!=null and gender.length()>0">player_gender = #{gender},</if>
+            <if test="birthday!=null and birthday.length()>0">player_birthday = #{birthday},</if>
+            <if test="constellation!=null and constellation.length()>0">player_constellation = #{constellation}</if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <resultMap id="player" type="Player">
+        <result property="name" column="player_name"/>
+        <result property="avatar" column="player_avatar"/>
+        <result property="status" column="player_status"/>
+        <result property="gender" column="player_gender"/>
+        <result property="gameNumber" column="player_play_num"/>
+        <result property="birthday" column="player_birthday"/>
+        <result property="constellation" column="player_constellation"/>
+    </resultMap>
+</mapper>

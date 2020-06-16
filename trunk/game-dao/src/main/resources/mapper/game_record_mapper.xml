@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ascn.richlife.dao.gamerecord.GameRecordDao">
+
+    <!--添加游戏记录-->
+    <insert id="addGameRecord" parameterType="GameRecord">
+        INSERT INTO we_game_record(playerId, name,job,occupation, flowCash,increasedCash,inOrOut,roomCode, timeIntegral, qualityIntegral, whenLong,createWealth,manageWealth,useOfWealth,surpassWealth,comprehensiveScore)
+        VALUES (#{playerId},#{name},#{job},#{occupation},#{flowCash},#{increasedCash},#{inOrOut},#{roomCode},#{timeIntegral},#{qualityIntegral},#{whenLong},#{createWealth},#{manageWealth},#{useOfWealth},#{surpassWealth},#{comprehensiveScore})
+    </insert>
+
+    <!--获取玩家的所有游戏记录-->
+    <select id="getGameRecords" parameterType="java.lang.String" resultMap="gameRecords">
+        SELECT id,playerId,name,occupation,increasedCash,inOrOut,whenLong,roomCode,comprehensiveScore,timeIntegral,qualityIntegral,createTime,status,surpassWealth,useOfWealth,manageWealth,createWealth,flowCash,job FROM we_game_record WHERE playerId = #{playerId}
+    </select>
+
+    <!--获取房间中所有玩家的记录-->
+    <select id="getGameRecordsRoom" parameterType="java.lang.String" resultMap="gameRecords">
+        SELECT id,playerId,name,occupation,increasedCash,inOrOut,whenLong,roomCode,comprehensiveScore,timeIntegral,qualityIntegral,createTime,status,surpassWealth,useOfWealth,manageWealth,createWealth,flowCash,job FROM we_game_record WHERE roomCode = #{roomCode}
+    </select>
+
+    <resultMap id="gameRecords" type="GameRecord">
+        <result property="name" column="name"/>
+        <result property="job" column="job"/>
+        <result property="occupation" column="occupation"/>
+        <result property="flowCash" column="flowCash"/>
+        <result property="increasedCash" column="increasedCash"/>
+        <result property="inOrOut" column="inOrOut"/>
+        <result property="roomCode" column="roomCode"/>
+        <result property="timeIntegral" column="timeIntegral"/>
+        <result property="qualityIntegral" column="qualityIntegral"/>
+        <result property="whenLong" column="whenLong"/>
+        <result property="createTime" column="createTime"/>
+    </resultMap>
+</mapper>

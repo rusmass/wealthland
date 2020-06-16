@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ascn.richlife.dao.role.RoleDao">
+
+    <!--根据ID查询玩家-->
+    <select id="getRoleInfo" parameterType="java.lang.Integer" resultType="Role">
+        SELECT * FROM we_game_role WHERE id =  #{id}
+    </select>
+
+</mapper>

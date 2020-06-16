@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ascn.richlife.dao.card.OuterStockDao">
+
+
+    <!--查询所有股票卡牌信息-->
+    <select id="selectCard" resultType="OuterStock">
+        SELECT id,type,name,path,instructions,stockCode,billName,todayPrice,investmentIncome,dividend,qualityIntegral,qualityIntegralInstruction,nonLaborIncome,priceScope,stockNumber,cardIntegral,giveUpIntegral FROM we_card_outer_stock_chance
+    </select>
+
+    <!--根据ID查询玩家-->
+    <select id="selectCardById" parameterType="java.lang.Integer" resultType="OuterStock">
+        SELECT id,type,name,path,instructions,stockCode,billName,todayPrice,investmentIncome,dividend,qualityIntegral,qualityIntegralInstruction,nonLaborIncome,priceScope,stockNumber,cardIntegral,giveUpIntegral FROM we_card_outer_stock_chance WHERE id =  #{id}
+    </select>
+
+</mapper>

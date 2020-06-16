@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ascn.richlife.dao.share.ShareDao">
+
+    <!--查询游戏分享数据-->
+    <select id="findGame" resultType="Share">
+        SELECT title,txt,address,weburl FROM wish_each.we_share WHERE type = 0
+    </select>
+
+    <!--插叙房间分享数据-->
+    <select id="findRoom" resultType="Share">
+        SELECT title,txt,address,weburl FROM wish_each.we_share WHERE type = 1
+    </select>
+
+    <!--查询梦想板-->
+    <select id="findDreamBoard" resultType="Share">
+        SELECT title,txt,address,weburl FROM wish_each.we_share WHERE type = 3
+    </select>
+</mapper>

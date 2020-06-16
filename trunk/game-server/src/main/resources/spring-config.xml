@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.ascn.richlife"/>
+
+    <!--加载mysql数据库配置信息-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <!--日志配置文件-->
+    <context:property-placeholder location="classpath:log4j.properties"/>
+
+    <!--初始化数据源-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!--初始化连接数-->
+        <property name="initialSize" value="${connection.initialSize}"></property>
+        <!-- 最大连接数 -->
+        <property name="maxActive" value="${connection.maxActive}"></property>
+        <!-- 最大可空闲 -->
+        <property name="maxIdle" value="${connection.maxIdle}"></property>
+        <!--最小空闲连接-->
+        <property name="minIdle" value="${connection.minIdle}"/>
+        <!-- 最大等待秒数，单位为毫秒， 超过时间会报出错误信息 -->
+        <property name="maxWait" value="${connection.maxWait}"></property>
+    </bean>
+
+    <!--sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--数据库连接池-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--加载mybatis配置文件-->
+        <property name="typeAliasesPackage" value="com.ascn.richlife.model"/>
+        <!--加载mapper文件-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+
+    <!--扫描dao接口-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.ascn.richlife.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!--线程池-->
+    <bean id="threadPoolTaskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <!--线程池维护线程的最少数量-->
+        <property name="corePoolSize" value="10"/>
+        <!--允许的空闲时间-->
+        <property name="keepAliveSeconds" value="200"/>
+        <!--线程池维护线程的最大数量-->
+        <property name="maxPoolSize" value="10"/>
+        <!--缓存队列-->
+        <property name="queueCapacity" value="20"/>
+        <!--对拒绝task的处理策略-->
+        <property name="rejectedExecutionHandler">
+            <bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy"/>
+        </property>
+    </bean>
+</beans>
